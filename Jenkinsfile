@@ -35,8 +35,8 @@ pipeline
         stage('Regression Automation Tests') {
             steps {
                 catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
-                    git 'https://github.com/shadab36/barlin_Automation.git'
-                    bat "mvn clean test -Dsurefire.suiteXmlFiles=src/test/resources/testrunners/resgister.xml"
+                    git 'https://github.com/udaysinghc/rezysaveautomation.git'
+                    bat "mvn clean test"
                     
                 }
             }
