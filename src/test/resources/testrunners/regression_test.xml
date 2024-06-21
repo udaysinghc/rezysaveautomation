@@ -18,10 +18,23 @@
             </class>
         </classes>
     </test>
-    <test name="invalid user test">
+    <test name="invalid user">
         <parameter name="browser" value="chrome"/>
         <classes>
             <class name="com.qa.rezysaveplatform.tests.InvalidUserLoginPageTest"/>
+        </classes>
+    </test>
+
+    <test name="dashboard test">
+        <parameter name="browser" value="chrome"/>
+        <classes>
+            <class name="com.qa.rezysaveplatform.tests.DashboardPageTest"/>
+        </classes>
+    </test>
+    <test name="inventory test">
+        <parameter name="browser" value="chrome"/>
+        <classes>
+            <class name="com.qa.rezysaveplatform.tests.InventoryPageTest"/>
         </classes>
     </test>
 </suite>

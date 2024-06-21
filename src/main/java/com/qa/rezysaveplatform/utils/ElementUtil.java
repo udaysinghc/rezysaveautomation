@@ -89,7 +89,6 @@ public class ElementUtil {
     getElement(locator).click();
   }
 
-
   public void doClick(String locatorType, String locatorValue) {
     getElement(locatorType, locatorValue).click();
   }
@@ -184,12 +183,12 @@ public class ElementUtil {
     }
   }
 
-  public void clikcOnElement(By locator, String eleText) {
+  public void clickOnElement(By locator, String eleText) {
     List<WebElement> eleList = getElements(locator);
     System.out.println(eleList.size());
     for (WebElement e : eleList) {
       String text = e.getText();
-      System.out.println(text);
+      System.out.println("name of installer" + text);
       if (text.contains(eleText)) {
         e.click();
         break;
@@ -352,16 +351,6 @@ public class ElementUtil {
     }
   }
 
-  // ****************Wait Utils***************//
-
-  /**
-   * An expectation for checking that an element is present on the DOM of a page. This does not
-   * necessarily mean that the element is visible on the page.
-   *
-   * @param locator
-   * @param timeOut
-   * @return
-   */
   public WebElement waitForPresenceOfElement(By locator, int timeOut) {
     WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(timeOut));
     WebElement element = wait.until(ExpectedConditions.presenceOfElementLocated(locator));
@@ -369,15 +358,7 @@ public class ElementUtil {
     return element;
   }
 
-  /**
-   * An expectation for checking that an element is present on the DOM of a page. This does not
-   * necessarily mean that the element is visible on the page.
-   *
-   * @param locator
-   * @param timeOut
-   * @param intervalTime
-   * @return
-   */
+
   public WebElement waitForPresenceOfElement(By locator, int timeOut, int intervalTime) {
     WebDriverWait wait =
         new WebDriverWait(driver, Duration.ofSeconds(timeOut), Duration.ofSeconds(intervalTime));
@@ -386,21 +367,19 @@ public class ElementUtil {
     return element;
   }
 
-  /**
-   * An expectation for checking that an element is present on the DOM of a page and visible.
-   * Visibility means that the element is not only displayed but also has a height and width that is
-   * greater than 0.
-   *
-   * @param locator
-   * @param timeOut
-   * @return
-   */
   @Step("waiting for element: {0} with timeout {1}")
   public WebElement waitForVisibilityOfElement(By locator, int timeOut) {
     WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(timeOut));
     WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
     isHighlight(element);
     return element;
+  }
+
+  @Step("waiting for element: {0} with timeout {1}")
+  public void waitForINVisibilityOfElement(By locator, int timeOut) {
+    WebElement text=driver.findElement(locator);
+    WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(timeOut));
+     wait.until(ExpectedConditions.invisibilityOf(text));
   }
 
   public WebElement waitForVisibilityOfElement(By locator, int timeOut, int intervalTime) {
@@ -704,8 +683,14 @@ public class ElementUtil {
   public void verifyText(By locator, String expectedText) {
     WebElement element = driver.findElement(locator);
     String actualText = element.getText();
+    System.out.println("actualText" + actualText);
     Assert.assertTrue(
         actualText.contains(expectedText),
-        "Text verification failed. Expected: '" + expectedText + "', Actual: '" + actualText + "'");
+        "Text verification failed. Expected: '"
+            + expectedText
+            + "' to be found in actual text: '"
+            + actualText
+            + "'");
   }
+
 }

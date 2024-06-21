@@ -18,8 +18,8 @@ public class InvalidUserLoginPageTest extends BaseTest {
     }
 
     @Test(dataProvider = "invalidUserData", priority = 1)
-    public void invalidUserTest(String userEmail, String password, String expectedText) {
-        loginPage.invalidUser(userEmail, password, expectedText);
+    public void LoginTestInvalidUser(String userEmail, String password, String expectedText) {
+        loginPage.doLoginInvalidUser(userEmail, password, expectedText);
     }
 
 }

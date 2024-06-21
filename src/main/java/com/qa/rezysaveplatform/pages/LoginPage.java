@@ -1,8 +1,8 @@
 package com.qa.rezysaveplatform.pages;
 
-import com.qa.rezysaveplatform.utils.JavaScriptUtil;
+
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
+
 import org.openqa.selenium.WebDriver;
 
 import com.qa.rezysaveplatform.constants.AppConstants;
@@ -13,17 +13,13 @@ public class LoginPage {
 
   private final WebDriver driver;
   private final ElementUtil eleUtil;
-
+  private final By searchIcon = By.cssSelector("[alt*='search']");
   private final By logoImage = By.cssSelector("[class*='_companyLogo']");
   private final By emailTextFiled = By.id("username");
   private final By passwordTextFiled = By.id("password");
   private final By submitButton = By.cssSelector("[type='submit']");
 
   public final By errorTextTitle = By.cssSelector("[class*='_inputErrorMessage']");
-
-  public final By username=By.cssSelector("[alt*='upArrow']");
-
-  public final By logout=By.xpath("(//div[contains(@class,'_innerText')])[3]");
 
   // page const...
   public LoginPage(WebDriver driver) {
@@ -36,7 +32,7 @@ public class LoginPage {
     return new LoginPage(driver);
   }
 
-  public void loginToApplication(String email, String password){
+  public void doLogin(String email, String password) {
     eleUtil.waitForVisibilityOfElement(emailTextFiled, 10);
     eleUtil.doSendKeys(this.emailTextFiled, email);
     eleUtil.doSendKeys(this.passwordTextFiled, password);
@@ -56,7 +52,7 @@ public class LoginPage {
     Assert.assertEquals(expectedText, eleUtil.doElementGetText(errorTextTitle));
   }
 
-  public void invalidUser(String email, String password, String expectedText) {
+  public void doLoginInvalidUser(String email, String password, String expectedText) {
 
     eleUtil.waitForVisibilityOfElement(emailTextFiled, 30);
     eleUtil.clearInput(emailTextFiled);
@@ -67,5 +63,19 @@ public class LoginPage {
     eleUtil.waitForVisibilityOfElement(errorTextTitle, 10);
     System.out.println("title" + eleUtil.doElementGetText(errorTextTitle));
     Assert.assertEquals(expectedText, eleUtil.doElementGetText(errorTextTitle));
+  }
+
+  public DashboardPage loginApp(String email, String password) throws InterruptedException {
+    eleUtil.waitForVisibilityOfElement(emailTextFiled, 10);
+    eleUtil.doSendKeys(this.emailTextFiled, email);
+    eleUtil.doSendKeys(this.passwordTextFiled, password);
+    eleUtil.doClick(submitButton);
+    Thread.sleep(5000);
+    return new DashboardPage(driver);
+  }
+
+  public InventoryPage searchOption() throws InterruptedException {
+    eleUtil.waitForPresenceOfElement(searchIcon, 20);
+    return new InventoryPage(driver);
   }
 }

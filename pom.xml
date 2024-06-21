@@ -146,7 +146,7 @@
                     <reuseForks>true</reuseForks>
                     <suiteXmlFiles>
                         <suiteXmlFile>
-                            src/test/resources/testrunners/login.xml
+                            src/test/resources/testrunners/regression_test.xml
                         </suiteXmlFile>
 
                     </suiteXmlFiles>

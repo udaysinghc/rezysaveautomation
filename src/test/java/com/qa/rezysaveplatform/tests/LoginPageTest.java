@@ -19,8 +19,8 @@ public class LoginPageTest extends BaseTest {
   }
 
   @Test(dataProvider = "getUserExcelData",priority = 1)
-  public void login(String userEmail, String password) {
-    loginPage.loginToApplication(userEmail, password);
+  public void loginTest(String userEmail, String password) throws InterruptedException {
+    loginPage.doLogin(userEmail, password);
   }
 
 }

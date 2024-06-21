@@ -43,7 +43,7 @@ public class ExcelUtil {
           // Check for null before converting to string
           if (cell != null) {
             data[i][j] = dataFormatter.formatCellValue(cell);
-            System.out.println("testdatat" + data[i][j]);
+            // System.out.println("testdatat" + data[i][j]);
           } else {
             // If cell is null, you can set it to an empty string or any default value
             data[i][j] = "";
